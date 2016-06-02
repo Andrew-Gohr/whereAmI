@@ -21,6 +21,7 @@ public class MainGame {
 	static int DY = 0;
 	static int X2 = 0;
 	static int Y2 = 0;
+	static boolean first = true;
 
 	static Map map;
 	static Player player;
@@ -42,9 +43,11 @@ public class MainGame {
 			X = Mouse.getX();
 			Y = Mouse.getY();
 			
+			
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			if (Mouse.isButtonDown(0)) {
-				if (saveTile.isInBounds(X, Y)) {
+				if (saveTile.isInBounds(X, Y) && first == true) {
+					
 					Save toSave = new Save(map, player, monsters);
 					FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
 				}
@@ -104,6 +107,12 @@ public class MainGame {
 				
 				monsters.addMonster(new Monster(X, Y, 20, 2));
 				
+			}
+			if (Mouse.isButtonDown(0) && first == true){
+				first = false;
+			}
+			else if (!Mouse.isButtonDown(0)){
+				first = true;
 			}
 			MapControl.render(map);
 			player.render();

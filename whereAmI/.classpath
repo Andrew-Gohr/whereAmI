@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="lib/lwjgl/jar/asm-debug-all.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/jinput.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/laf-plugin-7.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/jar/laf-widget-7.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/log4j-api-2.0-beta9.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/lwjgl_test.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/lwjgl_util_applet.jar"/>
@@ -17,13 +16,9 @@
 	<classpathentry kind="lib" path="lib/lwjgl/jar/substance-7.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jar/trident-7.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/ibxm.jar"/>
-	<classpathentry kind="lib" path="lib/slick/lib/jinput.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/jnlp.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/jogg-0.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="lib/slick/lib/lwjgl_util_applet.jar"/>
-	<classpathentry kind="lib" path="lib/slick/lib/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="lib/slick/lib/lwjgl.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/natives-linux.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/natives-mac.jar"/>
 	<classpathentry kind="lib" path="lib/slick/lib/natives-windows.jar"/>
