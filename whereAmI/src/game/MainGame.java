@@ -22,7 +22,8 @@ public class MainGame {
 	static int X2 = 0;
 	static int Y2 = 0;
 	static boolean first = true;
-
+	
+	//data variables
 	static Map map;
 	static Player player;
 	static Monsters monsters;
@@ -34,9 +35,11 @@ public class MainGame {
 		monsters = save.getMonsters();
 		int mapWidth = map.getWidth();
 		int mapHeight = map.getHeight();
-
+		
 		Tile saveTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 50, 50, 3);
 		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, 2);
+		
+		//Main Loop
 		while (!Display.isCloseRequested()) {
 			DX = Mouse.getDX();
 			DY = Mouse.getDY();
@@ -44,6 +47,8 @@ public class MainGame {
 			Y = Mouse.getY();
 
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+			
+			//left click
 			if (Mouse.isButtonDown(0)) {
 				if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
 					if (saveTile.isInBounds(X, Y) && first == true) {
@@ -54,34 +59,43 @@ public class MainGame {
 					if (quitTile.isInBounds(X, Y) && first == true) {
 						break;
 					}
-
+					
+					//check each tile for a collision with mouse
 					for (int i = 0; i < mapWidth; i++) {
 						for (int j = 0; j < mapHeight; j++) {
-
-							if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(0))) {
+							//update adjacent tiles and set as a wall
+							if (map.getCoord(i, j).isInBounds(X, Y)) {
 								map.getCoord(i, j).setWall(true);
 								MapControl.updateTile(i, j, map);
 								MapControl.updateAdjacent(i, j, map);
 							}
 						}
 					}
+					
+					//add a monster if first click
 				} else if (first == true){
 					monsters.addMonster(new Monster(X, Y, 15, 0));
 				}
 			}
+			
+			//right click
 			if (Mouse.isButtonDown(1)) {
-
+				
 				if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
+					
+					//check each tile for collisions with the mouse
 					for (int i = 0; i < mapWidth; i++) {
 						for (int j = 0; j < mapHeight; j++) {
-
-							if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(1))) {
+							//set tile as a floor and update adjacent
+							if (map.getCoord(i, j).isInBounds(X, Y)) {
 								map.getCoord(i, j).setWall(false);
 								map.getCoord(i, j).setTexture(21);
 								MapControl.updateAdjacent(i, j, map);
 							}
 						}
 					}
+					
+					//remove monster if colliding with mouse
 				} else {
 					for (int i = 0; i < monsters.size(); i++){
 					if(monsters.getMonster(i).isInBounds(X, Y)){
@@ -90,6 +104,8 @@ public class MainGame {
 					}
 				}
 			}
+			
+			//middle click
 			if (Mouse.isButtonDown(2)) {
 				MapControl.move(DX, DY, map);
 				PlayerControl.move(DX, DY, player, map);
@@ -117,6 +133,7 @@ public class MainGame {
 			} else if (!Mouse.isButtonDown(0)) {
 				first = true;
 			}
+			//render everything
 			MapControl.render(map);
 			player.render();
 			Render.monsters(monsters);
@@ -124,8 +141,8 @@ public class MainGame {
 			Render.Tile(quitTile);
 
 			Display.update();
-
 			Display.sync(60);
+			
 		}
 
 		Display.destroy();
