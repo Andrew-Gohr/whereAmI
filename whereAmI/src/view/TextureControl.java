@@ -1,7 +1,7 @@
 package view;
 
 import java.io.IOException;
-
+import data.TextureID;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -25,6 +25,7 @@ public class TextureControl {
 
 	public static void loadWalls() {
 		loadTexture("tiles/allSides.png", "PNG"); // 5
+		TextureID.ALL = 5;
 		loadTexture("tiles/down.png", "PNG"); // 6
 		loadTexture("tiles/left.png", "PNG"); // 7
 		loadTexture("tiles/leftDown.png", "PNG"); // 8
