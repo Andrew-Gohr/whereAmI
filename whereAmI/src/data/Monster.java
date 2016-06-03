@@ -39,7 +39,7 @@ public class Monster implements Serializable {
 	
 	public boolean isInBounds(int mouseX, int mouseY) {
 
-		return mouseX > a[0] && mouseX < b[1] && mouseY > a[1] && mouseY < b[1];
+		return mouseX > a[0] && mouseX < b[0] + tileSize && mouseY > a[1] && mouseY < b[1];
 	}
 
 	public int[] getA() {
