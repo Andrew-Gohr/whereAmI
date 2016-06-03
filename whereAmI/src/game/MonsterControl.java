@@ -4,8 +4,7 @@ import data.Map;
 import data.Monster;
 
 public class MonsterControl {
-	
-	
+
 	public static void move(int Dx, int Dy, Monster monster, Map map) {
 		int tileSize = monster.getTileSize();
 		int x = monster.getX();
@@ -51,5 +50,5 @@ public class MonsterControl {
 		}
 		return false;
 	}
-	
+
 }

@@ -42,53 +42,62 @@ public class MainGame {
 			DY = Mouse.getDY();
 			X = Mouse.getX();
 			Y = Mouse.getY();
-			
-			
+
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			if (Mouse.isButtonDown(0)) {
-				if (saveTile.isInBounds(X, Y) && first == true) {
-					
-					Save toSave = new Save(map, player, monsters);
-					FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
-				}
-				if (quitTile.isInBounds(X, Y)) {
-					break;
-				}
-				for (int i = 0; i < mapWidth; i++) {
-					for (int j = 0; j < mapHeight; j++) {
+				if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
+					if (saveTile.isInBounds(X, Y) && first == true) {
 
-						if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(0))) {
-							map.getCoord(i, j).setWall(true);
-							MapControl.updateTile(i, j, map);
-							MapControl.updateAdjacent(i, j, map);
+						Save toSave = new Save(map, player, monsters);
+						FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
+					}
+					if (quitTile.isInBounds(X, Y) && first == true) {
+						break;
+					}
+
+					for (int i = 0; i < mapWidth; i++) {
+						for (int j = 0; j < mapHeight; j++) {
+
+							if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(0))) {
+								map.getCoord(i, j).setWall(true);
+								MapControl.updateTile(i, j, map);
+								MapControl.updateAdjacent(i, j, map);
+							}
 						}
 					}
+				} else if (first == true){
+					monsters.addMonster(new Monster(X, Y, 15, 0));
 				}
-
 			}
 			if (Mouse.isButtonDown(1)) {
 
-				for (int i = 0; i < mapWidth; i++) {
-					for (int j = 0; j < mapHeight; j++) {
+				if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
+					for (int i = 0; i < mapWidth; i++) {
+						for (int j = 0; j < mapHeight; j++) {
 
-						if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(1))) {
-							map.getCoord(i, j).setWall(false);
-							map.getCoord(i, j).setTexture(21);
-							MapControl.updateAdjacent(i, j, map);
+							if (map.getCoord(i, j).isInBounds(X, Y) && (Mouse.isButtonDown(1))) {
+								map.getCoord(i, j).setWall(false);
+								map.getCoord(i, j).setTexture(21);
+								MapControl.updateAdjacent(i, j, map);
+							}
 						}
 					}
+				} else {
+					for (int i = 0; i < monsters.size(); i++){
+					if(monsters.getMonster(i).isInBounds(X, Y)){
+						monsters.removeMonster(i);
+					}
+					}
 				}
-
 			}
 			if (Mouse.isButtonDown(2)) {
 				MapControl.move(DX, DY, map);
 				PlayerControl.move(DX, DY, player, map);
-				for (int i = 0; i < monsters.size(); i++){
+				for (int i = 0; i < monsters.size(); i++) {
 					MonsterControl.move(DX, DY, monsters.getMonster(i), map);
 				}
 			}
-			
-			
+
 			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 				PlayerControl.move(0, 2, player, map);
 			}
@@ -102,16 +111,10 @@ public class MainGame {
 			if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 				PlayerControl.move(2, 0, player, map);
 			}
-			
-			if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
-				
-				monsters.addMonster(new Monster(X, Y, 20, 2));
-				
-			}
-			if (Mouse.isButtonDown(0) && first == true){
+
+			if (Mouse.isButtonDown(0) && first == true) {
 				first = false;
-			}
-			else if (!Mouse.isButtonDown(0)){
+			} else if (!Mouse.isButtonDown(0)) {
 				first = true;
 			}
 			MapControl.render(map);

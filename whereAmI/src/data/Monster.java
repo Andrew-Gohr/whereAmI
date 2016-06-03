@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import view.Render;
 
-public class Monster implements Serializable{
-	
+public class Monster implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -32,9 +32,14 @@ public class Monster implements Serializable{
 		this.c[0] = (x + (tileSize));
 		this.c[1] = (y - (tileSize));
 	}
-	
+
 	public void render() {
 		Render.monster(this);
+	}
+	
+	public boolean isInBounds(int mouseX, int mouseY) {
+
+		return mouseX > a[0] && mouseX < b[1] && mouseY > a[1] && mouseY < b[1];
 	}
 
 	public int[] getA() {
@@ -138,7 +143,5 @@ public class Monster implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

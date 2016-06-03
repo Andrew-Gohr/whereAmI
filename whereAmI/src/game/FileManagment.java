@@ -49,26 +49,23 @@ public class FileManagment {
 		return save;
 
 	}
-	
+
 	public static String[] getSaves() {
-	
-		
+
 		File dir = new File("saves/");
-		
-		  File[] directoryListing = dir.listFiles();
-		  String[] saves = new String[directoryListing.length];
-		  if (directoryListing != null) {
-		    //for (File child : directoryListing) {
-			  for (int i = 0; i < directoryListing.length; i++) {
-				  
-		     saves[i] = directoryListing[i].getPath();
-		     System.out.println(directoryListing[i].getPath());
-		    }
-		  }
+
+		File[] directoryListing = dir.listFiles();
+		String[] saves = new String[directoryListing.length];
+		if (directoryListing != null) {
+			// for (File child : directoryListing) {
+			for (int i = 0; i < directoryListing.length; i++) {
+
+				saves[i] = directoryListing[i].getPath();
+				System.out.println(directoryListing[i].getPath());
+			}
+		}
 		return saves;
-		
-		
-		
+
 	}
 
 }

@@ -11,13 +11,13 @@ public class RunGame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if (LaunchPadForm.isvalid()){
-		LaunchPad.exit();
 
-		Render.init(LaunchPadForm.getSelectedDisplay(), LaunchPadForm.isFullScreen());
+		if (LaunchPadForm.isvalid()) {
+			LaunchPad.exit();
 
-		MainGame.startGame(LaunchPadForm.getSave());
+			Render.init(LaunchPadForm.getSelectedDisplay(), LaunchPadForm.isFullScreen());
+
+			MainGame.startGame(LaunchPadForm.getSave());
 		} else {
 			LaunchPadForm.setStatus("Select a Load Type.");
 		}

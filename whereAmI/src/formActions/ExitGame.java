@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import game.LaunchPad;
 
-public class ExitGame implements ActionListener{
+public class ExitGame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

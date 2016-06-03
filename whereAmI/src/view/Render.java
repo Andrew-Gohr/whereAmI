@@ -1,6 +1,5 @@
 package view;
 
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -15,12 +14,10 @@ public class Render {
 	private static int screenHeight;
 
 	public static void init(DisplayMode displayMode, boolean fullScreen) {
-		
+
 		screenWidth = displayMode.getWidth();
 		screenHeight = displayMode.getHeight();
-		
-		
-		
+
 		try {
 
 			if (!fullScreen) {
@@ -40,7 +37,7 @@ public class Render {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, screenWidth, 0, screenHeight, 1, -1);
-		//GL11.glOrtho(100, 100, 100, 100, 1, -1);
+		// GL11.glOrtho(100, 100, 100, 100, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		TextureControl.loadTexture("play.png", "PNG");
@@ -84,15 +81,15 @@ public class Render {
 		GL11.glVertex2f(monster.getB()[0], monster.getB()[1]);
 		GL11.glVertex2f(monster.getC()[0], monster.getC()[1]);
 		GL11.glEnd();
-		
+
 	}
+
 	public static void monsters(Monsters monsters) {
-		for (int i = 0; i < monsters.size(); i++){
-			
+		for (int i = 0; i < monsters.size(); i++) {
 			monster(monsters.getMonster(i));
-			
+
 		}
-		
+
 	}
 
 }

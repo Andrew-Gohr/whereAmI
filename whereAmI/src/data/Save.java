@@ -13,6 +13,7 @@ public class Save implements Serializable {
 	private Map map = null;
 	private Player player = null;
 	private Monsters monsters = null;
+
 	public Save(Map map, Player player, Monsters monsters) {
 
 		this.map = map;
@@ -84,6 +85,5 @@ public class Save implements Serializable {
 	public void setMonsters(Monsters monsters) {
 		this.monsters = monsters;
 	}
-
 
 }

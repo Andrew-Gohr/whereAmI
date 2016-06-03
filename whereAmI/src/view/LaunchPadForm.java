@@ -43,12 +43,12 @@ public class LaunchPadForm extends JFrame {
 			int j = 0;
 			for (int i = 0; i < modes.length; i++) {
 
-				if (modes[i].isFullscreenCapable()){
-					
+				if (modes[i].isFullscreenCapable()) {
+
 					displays[j] = Integer.toString(modes[i].getWidth()) + " x "
 							+ Integer.toString(modes[i].getHeight());
 					j++;
-				System.out.println(i);
+					System.out.println(i);
 				}
 
 			}
@@ -57,14 +57,11 @@ public class LaunchPadForm extends JFrame {
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 		JPanel jp = new JPanel();
-		
+
 		ButtonGroup loadType = new ButtonGroup();
-		
+
 		jp.setLayout(new GridLayout(5, 2));
 		jp.add(resSelect = new JComboBox<Object>(displays));
 		jp.add(fullScreen = new JRadioButton("FullScreen"));
@@ -73,11 +70,11 @@ public class LaunchPadForm extends JFrame {
 		loadType.add(newGame);
 		loadType.add(loadGame);
 		jp.add(newSave = new JTextField("new_game"));
-		
+
 		jp.add(loadSelect = new JComboBox<Object>(FileManagment.getSaves()));
 		jp.add(exitButton = new JButton("Quit"));
 		jp.add(runGame = new JButton("Enter The Building"));
-		
+
 		jp.add(statusField = new JLabel(""));
 
 		runGame.addActionListener(new RunGame());
@@ -93,19 +90,18 @@ public class LaunchPadForm extends JFrame {
 	}
 
 	public static boolean isFullScreen() {
-		
+
 		return fullScreen.isSelected();
-		
+
 	}
-	
+
 	public static Save getSave() {
-		if (loadGame.isSelected()){
-		return FileManagment.load((String)loadSelect.getSelectedItem());
-		}
-		else if (newGame.isSelected()){
+		if (loadGame.isSelected()) {
+			return FileManagment.load((String) loadSelect.getSelectedItem());
+		} else if (newGame.isSelected()) {
 			Map map = new Map(25, 25, 30);
 			Player player = new Player(30, 30, 10);
-			Monsters Monsters = new Monsters(128);
+			Monsters Monsters = new Monsters();
 
 			return new Save(map, player, Monsters);
 		}
@@ -113,15 +109,16 @@ public class LaunchPadForm extends JFrame {
 	}
 
 	public static String getSaveString() {
-		
+
 		return newSave.getText();
 	}
+
 	public static boolean isvalid() {
 		return loadGame.isSelected() || newGame.isSelected();
 	}
 
 	public static void setStatus(String status) {
 		statusField.setText(status);
-		
+
 	}
 }

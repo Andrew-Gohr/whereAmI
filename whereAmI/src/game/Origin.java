@@ -7,9 +7,9 @@ import org.lwjgl.LWJGLUtil;
 public class Origin {
 
 	public static void main(String[] args) {
-		
+
 		File JGLLib = null;
-		
+
 		switch (LWJGLUtil.getPlatform()) {
 		case LWJGLUtil.PLATFORM_WINDOWS: {
 			JGLLib = new File("native/windows/");
@@ -29,7 +29,7 @@ public class Origin {
 		}
 			break;
 		}
-		
+
 		System.setProperty("org.lwjgl.librarypath", JGLLib.getAbsolutePath());
 
 		LaunchPad.run();
