@@ -9,6 +9,7 @@ import data.Monster;
 import data.Monsters;
 import data.Player;
 import data.Save;
+import data.TextureID;
 import data.Tile;
 import view.LaunchPadForm;
 import view.Render;
@@ -36,8 +37,8 @@ public class MainGame {
 		int mapWidth = map.getWidth();
 		int mapHeight = map.getHeight();
 		
-		Tile saveTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 50, 50, 3);
-		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, 2);
+		Tile saveTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 50, 50, TextureID.SAVETILE.getValue());
+		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, TextureID.QUITTILE.getValue());
 		
 		//Main Loop
 		while (!Display.isCloseRequested()) {
@@ -89,7 +90,7 @@ public class MainGame {
 							//set tile as a floor and update adjacent
 							if (map.getCoord(i, j).isInBounds(X, Y)) {
 								map.getCoord(i, j).setWall(false);
-								map.getCoord(i, j).setTexture(21);
+								map.getCoord(i, j).setTexture(TextureID.FLOOR.getValue());
 								MapControl.updateAdjacent(i, j, map);
 							}
 						}

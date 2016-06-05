@@ -26,7 +26,7 @@ public class Map implements Serializable {
 			x = 0;
 			for (int j = 0; j < height; j++) {
 				x += tileSize * 2;
-				grid[i][j] = new Tile(x, y, tileSize, 13);
+				grid[i][j] = new Tile(x, y, tileSize, TextureID.NONE.getValue());
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import data.Tile;
 import data.Player;
+import data.TextureID;
 import data.Monster;
 import data.Monsters;
 
@@ -40,10 +41,8 @@ public class Render {
 		// GL11.glOrtho(100, 100, 100, 100, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		TextureControl.loadTexture("play.png", "PNG");
-		TextureControl.loadTexture("quit.png", "PNG");
-		TextureControl.loadTexture("brick.png", "PNG");
-		TextureControl.loadTexture("background.jpg", "JPG");
+		TextureID.QUITTILE.setValue(TextureControl.loadTexture("quit.png", "PNG"));
+		TextureID.SAVETILE.setValue(TextureControl.loadTexture("save.png", "PNG"));
 		TextureControl.loadWalls();
 	}
 

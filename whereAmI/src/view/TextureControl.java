@@ -8,7 +8,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class TextureControl {
 
-	public static void loadTexture(String texToLoad, String type) {
+	public static int loadTexture(String texToLoad, String type) {
 		try {
 			Texture texture;
 			texture = TextureLoader.getTexture(type, ResourceLoader.getResourceAsStream("/res/" + texToLoad));
@@ -17,67 +17,67 @@ public class TextureControl {
 			System.out.println(">> Image width:    " + texture.getImageWidth());
 			System.out.println(">> Image height:   " + texture.getImageHeight());
 			System.out.println(">> Texture ID:     " + texture.getTextureID() + "\n");
-
+			return texture.getTextureID();
 		} catch (IOException ioe) {
 			System.out.println(ioe);
 		}
+		return 0;
 	}
 
 	public static void loadWalls() {
-		loadTexture("tiles/allSides.png", "PNG"); // 5
-		TextureID.ALL = 5;
-		loadTexture("tiles/down.png", "PNG"); // 6
-		loadTexture("tiles/left.png", "PNG"); // 7
-		loadTexture("tiles/leftDown.png", "PNG"); // 8
-		loadTexture("tiles/leftRightDown.png", "PNG"); // 9
-		loadTexture("tiles/leftUp.png", "PNG"); // 10
-		loadTexture("tiles/leftUpDown.png", "PNG"); // 11
-		loadTexture("tiles/leftUpRight.png", "PNG"); // 12
-		loadTexture("tiles/noSides.png", "PNG"); // 13
-		loadTexture("tiles/right.png", "PNG"); // 14
-		loadTexture("tiles/rightDown.png", "PNG"); // 15
-		loadTexture("tiles/up.png", "PNG"); // 16
-		loadTexture("tiles/upRight.png", "PNG"); // 17
-		loadTexture("tiles/upRightDown.png", "PNG"); // 18
-		loadTexture("tiles/upDown.png", "PNG"); // 19
-		loadTexture("tiles/leftRight.png", "PNG"); // 20
-		loadTexture("tiles/dungeonFloor.png", "PNG"); // 21
+		TextureID.ALL.setValue(loadTexture("tiles/allSides.png", "PNG")); // 5
+		TextureID.DOWN.setValue(loadTexture("tiles/down.png", "PNG")); // 6
+		TextureID.LEFT.setValue(loadTexture("tiles/left.png", "PNG")); // 7
+		TextureID.LEFTDOWN.setValue(loadTexture("tiles/leftDown.png", "PNG")); // 8
+		TextureID.LEFTRIGHTDOWN.setValue(loadTexture("tiles/leftRightDown.png", "PNG")); // 9
+		TextureID.LEFTUP.setValue(loadTexture("tiles/leftUp.png", "PNG")); // 10
+		TextureID.LEFTUPDOWN.setValue(loadTexture("tiles/leftUpDown.png", "PNG")); // 11
+		TextureID.LEFTUPRIGHT.setValue(loadTexture("tiles/leftUpRight.png", "PNG")); // 12
+		TextureID.NONE.setValue(loadTexture("tiles/noSides.png", "PNG")); // 13
+		TextureID.RIGHT.setValue(loadTexture("tiles/right.png", "PNG")); // 14
+		TextureID.RIGHTDOWN.setValue(loadTexture("tiles/rightDown.png", "PNG")); // 15
+		TextureID.UP.setValue(loadTexture("tiles/up.png", "PNG")); // 16
+		TextureID.UPRIGHT.setValue(loadTexture("tiles/upRight.png", "PNG")); // 17
+		TextureID.UPRIGHTDOWN.setValue(loadTexture("tiles/upRightDown.png", "PNG")); // 18
+		TextureID.UPDOWN.setValue(loadTexture("tiles/upDown.png", "PNG")); // 19
+		TextureID.LEFTRIGHT.setValue(loadTexture("tiles/leftRight.png", "PNG")); // 20
+		TextureID.FLOOR.setValue(loadTexture("tiles/dungeonFloor.png", "PNG")); // 21
 	}
 
 	public static int findWallTexture(boolean right, boolean left, boolean up, boolean down) {
 		if (!up && !down && !right && !left) {
-			return 5;
+			return TextureID.ALL.getValue();
 		} else if (up && down && left && right) {
-			return 13;
+			return TextureID.NONE.getValue();
 		} else if (!up && down && right && left) {
-			return 16;
+			return TextureID.UP.getValue();
 
 		} else if (!up && !down && right && left) {
-			return 19;
+			return TextureID.UPDOWN.getValue();
 		} else if (!up && !down && !right && left) {
-			return 18;
+			return TextureID.UPRIGHTDOWN.getValue();
 		} else if (up && !down && right && left) {
-			return 6;
+			return TextureID.DOWN.getValue();
 		} else if (up && !down && !right && left) {
-			return 15;
+			return TextureID.RIGHTDOWN.getValue();
 		} else if (up && !down && !right && !left) {
-			return 9;
+			return TextureID.LEFTRIGHTDOWN.getValue();
 		} else if (up && down && !right && left) {
-			return 14;
+			return TextureID.RIGHT.getValue();
 		} else if (up && down && !right && !left) {
-			return 20;
+			return TextureID.LEFTRIGHT.getValue();
 		} else if (up && down && right && !left) {
-			return 7;
+			return TextureID.LEFT.getValue();
 		} else if (!up && down && right && !left) {
-			return 10;
+			return TextureID.LEFTUP.getValue();
 		} else if (up && !down && right && !left) {
-			return 8;
+			return TextureID.LEFTDOWN.getValue();
 		} else if (!up && down && !right && left) {
-			return 17;
+			return TextureID.UPRIGHT.getValue();
 		} else if (!up && down && !right && !left) {
-			return 12;
+			return TextureID.LEFTUPRIGHT.getValue();
 		} else if (!up && !down && right && !left) {
-			return 11;
+			return TextureID.LEFTUPDOWN.getValue();
 		}
 		return 3;
 	}

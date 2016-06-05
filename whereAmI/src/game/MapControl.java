@@ -28,38 +28,6 @@ public class MapControl {
 		boolean left = map.getCoord(i, j - 1).isWall();
 		if (map.getCoord(i, j).isWall())
 			map.getCoord(i, j).setTexture(TextureControl.findWallTexture(right, left, up, down));
-		// if (right == false) {
-		// if (left == true && up == true && down == true) {
-		// map.getCoord(i, j).setTexture(14);
-		//
-		// } else if (left == true && up == true && down == false) {
-		// map.getCoord(i, j).setTexture(15);
-		//
-		// } else if (left == true && up == false && down == false) {
-		// map.getCoord(i, j).setTexture(18);
-		// } else if (left == false && up == false && down == false) {
-		// map.getCoord(i, j).setTexture(5);
-		// }
-		// } else if (left == false) {
-		// if (up == true && down == true) {
-		// map.getCoord(i, j).setTexture(7);
-		// } else if (up == true && down == false) {
-		// map.getCoord(i, j).setTexture(8);
-		// } else if (up == false && down == false) {
-		// map.getCoord(i, j).setTexture(11);
-		// }
-		// } else if (up == false) {
-		// if (down == true){
-		// map.getCoord(i, j).setTexture(16);
-		// } else {
-		// map.getCoord(i, j).setTexture(14);
-		// }
-		//
-		// } else if (down == false) {
-		// if (up == true){
-		// map.getCoord(i, j).setTexture(6);
-		// }
-		// }
 	}
 
 	public static void render(Map map) {
