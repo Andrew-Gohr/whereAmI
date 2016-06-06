@@ -2,8 +2,36 @@ package game;
 
 import data.Map;
 import data.Monster;
+import data.Monsters;
+import data.Player;
 
 public class MonsterControl {
+	
+	public static void AI(Monsters monsters, Player player, Map map) {
+		int x = 0,y = 0;
+		for (int i = 0; i < monsters.size(); i++){
+			if (player.getX() > monsters.getMonster(i).getX()) {
+				x = 1;
+			}
+			else if (player.getX() < monsters.getMonster(i).getX()){
+				x = -1;
+			}
+			else {
+				x = 0;
+			}
+			if (player.getY() > monsters.getMonster(i).getY()) {
+				y = 1;
+			}
+			else if (player.getY() < monsters.getMonster(i).getY()){
+				y = -1;
+			}
+			else {
+				y = 0;
+			}
+			move(x, 0, monsters.getMonster(i), map);
+			move(0, y, monsters.getMonster(i), map);
+		}
+	}
 
 	public static void move(int Dx, int Dy, Monster monster, Map map) {
 		int tileSize = monster.getTileSize();
@@ -35,11 +63,12 @@ public class MonsterControl {
 
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
+				if (map.getCoord(i, j).isWall()) {
 				int X1 = map.getCoord(i, j).getA()[0];
 				int Y1 = map.getCoord(i, j).getA()[1];
 				int X2 = map.getCoord(i, j).getC()[0];
 				int Y2 = map.getCoord(i, j).getC()[1];
-				if (map.getCoord(i, j).isWall()) {
+				
 					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
 
 						return true;

@@ -19,7 +19,8 @@ public enum TextureID {
 	UPRIGHTDOWN(0),
 	UPDOWN(0),
 	LEFTRIGHT(0),
-	FLOOR(0);
+	FLOOR(0),
+	ERR(0);
 
 	private int id;
 

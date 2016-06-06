@@ -20,28 +20,29 @@ public class TextureControl {
 			return texture.getTextureID();
 		} catch (IOException ioe) {
 			System.out.println(ioe);
+			
 		}
-		return 0;
+		return TextureID.ERR.getValue();
 	}
 
 	public static void loadWalls() {
-		TextureID.ALL.setValue(loadTexture("tiles/allSides.png", "PNG")); // 5
-		TextureID.DOWN.setValue(loadTexture("tiles/down.png", "PNG")); // 6
-		TextureID.LEFT.setValue(loadTexture("tiles/left.png", "PNG")); // 7
-		TextureID.LEFTDOWN.setValue(loadTexture("tiles/leftDown.png", "PNG")); // 8
-		TextureID.LEFTRIGHTDOWN.setValue(loadTexture("tiles/leftRightDown.png", "PNG")); // 9
-		TextureID.LEFTUP.setValue(loadTexture("tiles/leftUp.png", "PNG")); // 10
-		TextureID.LEFTUPDOWN.setValue(loadTexture("tiles/leftUpDown.png", "PNG")); // 11
-		TextureID.LEFTUPRIGHT.setValue(loadTexture("tiles/leftUpRight.png", "PNG")); // 12
-		TextureID.NONE.setValue(loadTexture("tiles/noSides.png", "PNG")); // 13
-		TextureID.RIGHT.setValue(loadTexture("tiles/right.png", "PNG")); // 14
-		TextureID.RIGHTDOWN.setValue(loadTexture("tiles/rightDown.png", "PNG")); // 15
-		TextureID.UP.setValue(loadTexture("tiles/up.png", "PNG")); // 16
-		TextureID.UPRIGHT.setValue(loadTexture("tiles/upRight.png", "PNG")); // 17
-		TextureID.UPRIGHTDOWN.setValue(loadTexture("tiles/upRightDown.png", "PNG")); // 18
-		TextureID.UPDOWN.setValue(loadTexture("tiles/upDown.png", "PNG")); // 19
-		TextureID.LEFTRIGHT.setValue(loadTexture("tiles/leftRight.png", "PNG")); // 20
-		TextureID.FLOOR.setValue(loadTexture("tiles/dungeonFloor.png", "PNG")); // 21
+		TextureID.ALL.setValue(loadTexture("tiles/allSides.png", "PNG"));
+		TextureID.DOWN.setValue(loadTexture("tiles/down.png", "PNG"));
+		TextureID.LEFT.setValue(loadTexture("tiles/left.png", "PNG"));
+		TextureID.LEFTDOWN.setValue(loadTexture("tiles/leftDown.png", "PNG"));
+		TextureID.LEFTRIGHTDOWN.setValue(loadTexture("tiles/leftRightDown.png", "PNG"));
+		TextureID.LEFTUP.setValue(loadTexture("tiles/leftUp.png", "PNG"));
+		TextureID.LEFTUPDOWN.setValue(loadTexture("tiles/leftUpDown.png", "PNG"));
+		TextureID.LEFTUPRIGHT.setValue(loadTexture("tiles/leftUpRight.png", "PNG"));
+		TextureID.NONE.setValue(loadTexture("tiles/noSides.png", "PNG"));
+		TextureID.RIGHT.setValue(loadTexture("tiles/right.png", "PNG"));
+		TextureID.RIGHTDOWN.setValue(loadTexture("tiles/rightDown.png", "PNG"));
+		TextureID.UP.setValue(loadTexture("tiles/up.png", "PNG"));
+		TextureID.UPRIGHT.setValue(loadTexture("tiles/upRight.png", "PNG"));
+		TextureID.UPRIGHTDOWN.setValue(loadTexture("tiles/upRightDown.png", "PNG"));
+		TextureID.UPDOWN.setValue(loadTexture("tiles/upDown.png", "PNG"));
+		TextureID.LEFTRIGHT.setValue(loadTexture("tiles/leftRight.png", "PNG"));
+		TextureID.FLOOR.setValue(loadTexture("tiles/dungeonFloor.png", "PNG")); 
 	}
 
 	public static int findWallTexture(boolean right, boolean left, boolean up, boolean down) {
@@ -79,7 +80,7 @@ public class TextureControl {
 		} else if (!up && !down && right && !left) {
 			return TextureID.LEFTUPDOWN.getValue();
 		}
-		return 3;
+		return TextureID.ERR.getValue();
 	}
 
 }

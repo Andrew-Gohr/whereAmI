@@ -134,6 +134,7 @@ public class MainGame {
 			} else if (!Mouse.isButtonDown(0)) {
 				first = true;
 			}
+			MonsterControl.AI(monsters, player, map);
 			//render everything
 			MapControl.render(map);
 			player.render();

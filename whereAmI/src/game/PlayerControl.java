@@ -34,11 +34,12 @@ public class PlayerControl {
 
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
+				if (map.getCoord(i, j).isWall()) {
 				int X1 = map.getCoord(i, j).getA()[0];
 				int Y1 = map.getCoord(i, j).getA()[1];
 				int X2 = map.getCoord(i, j).getC()[0];
 				int Y2 = map.getCoord(i, j).getC()[1];
-				if (map.getCoord(i, j).isWall()) {
+				
 					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
 
 						return true;
