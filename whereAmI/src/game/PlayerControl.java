@@ -8,10 +8,8 @@ public class PlayerControl {
 		int tileSize = player.getTileSize();
 		int x = player.getX();
 		int y = player.getY();
-		if (PlayerColiding(Dx + (x - (tileSize)), Dx + (x + (tileSize)), Dy + (y - (tileSize)), Dy + (y + (tileSize)),
+		if (!PlayerColiding(Dx + (x - (tileSize)), Dx + (x + (tileSize)), Dy + (y - (tileSize)), Dy + (y + (tileSize)),
 				map)) {
-
-		} else {
 			player.setX(x += Dx);
 			player.setY(y += Dy);
 			int[] a = new int[2];
@@ -26,6 +24,8 @@ public class PlayerControl {
 			player.setA(a);
 			player.setB(b);
 			player.setC(c);
+
+		} else {
 
 		}
 	}

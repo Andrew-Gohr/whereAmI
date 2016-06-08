@@ -110,9 +110,7 @@ public class MainGame {
 			if (Mouse.isButtonDown(2)) {
 				MapControl.move(DX, DY, map);
 				PlayerControl.move(DX, DY, player, map);
-				for (int i = 0; i < monsters.size(); i++) {
-					MonsterControl.move(DX, DY, monsters.getMonster(i), map);
-				}
+				
 			}
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {

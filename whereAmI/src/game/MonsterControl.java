@@ -28,56 +28,70 @@ public class MonsterControl {
 			else {
 				y = 0;
 			}
-			move(x, 0, monsters.getMonster(i), map);
-			move(0, y, monsters.getMonster(i), map);
+			
+				move(x, y, monsters.getMonster(i), map, monsters);
+				
+			
+			
 		}
 	}
 
-	public static void move(int Dx, int Dy, Monster monster, Map map) {
+	public static void move(int Dx, int Dy, Monster monster, Map map, Monsters monsters) {
 		int tileSize = monster.getTileSize();
 		int x = monster.getX();
 		int y = monster.getY();
-		if (MonsterColiding(Dx + (x - (tileSize)), Dx + (x + (tileSize)), Dy + (y - (tileSize)), Dy + (y + (tileSize)),
-				map)) {
-
-		} else {
+		int[] a = new int[2];
+		int[] b = new int[2];
+		int[] c = new int[2];
+		if (!xMonsterColiding(x, monster, map, monsters)) {
 			monster.setX(x += Dx);
-			monster.setY(y += Dy);
-			int[] a = new int[2];
-			int[] b = new int[2];
-			int[] c = new int[2];
+			
 			a[0] = (x - (tileSize));
-			a[1] = (y - (tileSize));
 			b[0] = (x);
-			b[1] = (y + (tileSize));
 			c[0] = (x + (tileSize));
-			c[1] = (y - (tileSize));
-			monster.setA(a);
-			monster.setB(b);
-			monster.setC(c);
-
 		}
+		if (!yMonsterColiding(y, monster, map, monsters)) {
+			
+			monster.setY(y += Dy);
+			a[1] = (y - (tileSize));
+			b[1] = (y + (tileSize));
+			c[1] = (y - (tileSize));
+			
+		}
+		monster.setA(a);
+		monster.setB(b);
+		monster.setC(c);
 	}
 
-	public static boolean MonsterColiding(int x1, int x2, int y1, int y2, Map map) {
-
+	public static boolean xMonsterColiding(int Dx, Monster monster, Map map, Monsters monsters) {
+		boolean collided = false;
+		//for (int i = 0; i < monsters.size(); i++){
+			
+		//}
+		
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
 				if (map.getCoord(i, j).isWall()) {
-				int X1 = map.getCoord(i, j).getA()[0];
-				int Y1 = map.getCoord(i, j).getA()[1];
-				int X2 = map.getCoord(i, j).getC()[0];
-				int Y2 = map.getCoord(i, j).getC()[1];
-				
-					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
-
-						return true;
+					collided = (monster.xwillCollide(Dx, map.getCoord(i, j).getX(), map.getCoord(i, j).getTileSize()));
 					}
 				}
-
-			}
 		}
-		return false;
+		return collided;
+	}
+	public static boolean yMonsterColiding(int Dy, Monster monster, Map map, Monsters monsters) {
+		boolean collided = false;
+		//for (int i = 0; i < monsters.size(); i++){
+			
+		//}
+		
+		for (int i = 0; i < map.getWidth(); i++) {
+			for (int j = 0; j < map.getHeight(); j++) {
+				if (map.getCoord(i, j).isWall()) {
+					collided = (monster.ywillCollide(Dy, map.getCoord(i, j).getY(), map.getCoord(i, j).getTileSize()));
+					}
+				}
+		}
+		return collided;
 	}
 
 }
