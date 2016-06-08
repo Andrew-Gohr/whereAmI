@@ -103,12 +103,7 @@ public class Monster implements Serializable {
 	public void setTexture(int texture) {
 		this.texture = texture;
 	}
-	public boolean xwillCollide(int Dx,int X, int size) {
-					return (X - size < Dx + x + tileSize && X + size >Dx + x - tileSize);
-	}
-	public boolean ywillCollide(int Dy, int Y, int size) {
-		return (Y - size <Dy + y + tileSize && Y + size > Dy + y - tileSize);
-}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
