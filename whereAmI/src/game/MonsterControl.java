@@ -29,7 +29,7 @@ public class MonsterControl {
 		int tileSize = monster.getTileSize();
 		int x = monster.getX();
 		int y = monster.getY();
-		if (!Collisions.MonsterMap(Dx, Dy, monster, map)){
+		if (!Collisions.monsterMap(Dx, Dy, monster, map) && !Collisions.monsterMonsters(Dx, Dy, monster, monsters)){
 		int[] a = new int[2];
 		int[] b = new int[2];
 		int[] c = new int[2];

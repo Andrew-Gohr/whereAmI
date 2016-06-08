@@ -99,8 +99,8 @@ public class LaunchPadForm extends JFrame {
 		if (loadGame.isSelected()) {
 			return FileManagment.load((String) loadSelect.getSelectedItem());
 		} else if (newGame.isSelected()) {
-			Map map = new Map(5, 5, 30);
-			Player player = new Player(30, 30, 10);
+			Map map = new Map(50, 50, 30);
+			Player player = new Player(40, 40, 10);
 			Monsters Monsters = new Monsters();
 
 			return new Save(map, player, Monsters);

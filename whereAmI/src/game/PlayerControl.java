@@ -9,7 +9,7 @@ public class PlayerControl {
 		int tileSize = player.getTileSize();
 		int x = player.getX();
 		int y = player.getY();
-		if (!Collisions.PlayerMap(Dx , Dy , player, map)) {
+		if (!Collisions.playerMap(Dx , Dy , player, map)) {
 			player.setX(x += Dx);
 			player.setY(y += Dy);
 			int[] a = new int[2];
