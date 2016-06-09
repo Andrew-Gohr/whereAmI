@@ -49,6 +49,32 @@ public class MonsterControl {
 		monster.setC(c);
 		}
 	}
+	public static void moveMap(int Dx, int Dy, Monsters monsters) {
+		for (int i = 0; i < monsters.size(); i++){
+		int tileSize = monsters.getMonster(i).getTileSize();
+		int x = monsters.getMonster(i).getX();
+		int y = monsters.getMonster(i).getY();
+		
+		int[] a = new int[2];
+		int[] b = new int[2];
+		int[] c = new int[2];
+		
+			monsters.getMonster(i).setX(x += Dx);
+			a[0] = (x - (tileSize));
+			b[0] = (x);
+			c[0] = (x + (tileSize));
+			monsters.getMonster(i).setY(y += Dy);
+			a[1] = (y - (tileSize));
+			b[1] = (y + (tileSize));
+			c[1] = (y - (tileSize));
+			
+		
+		monsters.getMonster(i).setA(a);
+		monsters.getMonster(i).setB(b);
+		monsters.getMonster(i).setC(c);
+		}
+		
+	}
 
 	
 	

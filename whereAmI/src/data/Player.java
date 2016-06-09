@@ -16,18 +16,12 @@ public class Player implements Serializable {
 	private int[] a, b, c;
 
 	public Player(int x, int y, int tileSize) {
-		this.setX(x);
-		this.setY(y);
-		this.setTileSize(tileSize);
 		a = new int[2];
 		b = new int[2];
 		c = new int[2];
-		this.a[0] = (x - (tileSize));
-		this.a[1] = (y - (tileSize));
-		this.b[0] = (x);
-		this.b[1] = (y + (tileSize));
-		this.c[0] = (x + (tileSize));
-		this.c[1] = (y - (tileSize));
+		this.setX(x);
+		this.setY(y);
+		this.setTileSize(tileSize);
 	}
 
 	public void render() {
@@ -73,6 +67,9 @@ public class Player implements Serializable {
 
 	public void setX(int x) {
 		this.x = x;
+		a[0] = x - tileSize;
+		b[0] = x;
+		c[0] = x + tileSize;
 	}
 
 	public int getY() {
@@ -81,6 +78,9 @@ public class Player implements Serializable {
 
 	public void setY(int y) {
 		this.y = y;
+		a[1] = (y - (tileSize));
+		b[1] = (y + (tileSize));
+		c[1] = (y - (tileSize));
 	}
 
 	/*

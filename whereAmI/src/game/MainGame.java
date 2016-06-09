@@ -78,6 +78,9 @@ public class MainGame {
 				} else if (first == true){
 					monsters.addMonster(new Monster(X, Y, 15, 0));
 				}
+				if (!Keyboard.isKeyDown(Keyboard.KEY_B)) {
+					
+				}
 			}
 			
 			//right click
@@ -111,6 +114,9 @@ public class MainGame {
 			if (Mouse.isButtonDown(2)) {
 				MapControl.move(DX, DY, map);
 				PlayerControl.move(DX, DY, player, map);
+				
+				MonsterControl.moveMap(DX, DY, monsters);
+				
 				
 			}
 
