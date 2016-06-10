@@ -44,6 +44,8 @@ public class Render {
 		TextureID.QUITTILE.setValue(TextureControl.loadTexture("quit.png", "PNG"));
 		TextureID.SAVETILE.setValue(TextureControl.loadTexture("save.png", "PNG"));
 		TextureID.ERR.setValue(TextureControl.loadTexture("ERROR.png", "PNG"));
+		TextureID.ENTRY.setValue(TextureControl.loadTexture("ladder.png", "png"));
+		TextureID.EXIT.setValue(TextureID.ENTRY.getValue());
 		TextureControl.loadWalls();
 	}
 
