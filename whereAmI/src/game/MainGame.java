@@ -30,7 +30,7 @@ public class MainGame {
 	static Player player;
 	static Monsters monsters;
 
-	public static void startGame(Save save) {
+	public static void startGame(Save save, boolean play) {
 
 		map = save.getMap();
 		player = save.getPlayer();
@@ -42,7 +42,79 @@ public class MainGame {
 		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, TextureID.QUITTILE.getValue());
 		
 		//Main Loop
+		if (play){
 		while (!Display.isCloseRequested() && !Collisions.playerMonsters(DX, DY, player, monsters)) {
+			DX = Mouse.getDX();
+			DY = Mouse.getDY();
+			X = Mouse.getX();
+			Y = Mouse.getY();
+
+			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+			
+			//left click
+			if (Mouse.isButtonDown(0)) {
+				
+					if (saveTile.isInBounds(X, Y) && first == true) {
+
+						Save toSave = new Save(map, player, monsters);
+						FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
+					}
+					if (quitTile.isInBounds(X, Y) && first == true) {
+						break;
+					}
+				
+			}
+			
+			//right click
+//			if (Mouse.isButtonDown(1)) {
+//				
+//				
+//			}
+			
+			//middle click
+			if (Mouse.isButtonDown(2)) {
+				MapControl.move(DX, DY, map);
+				PlayerControl.move(DX, DY, player, map);
+				
+				MonsterControl.moveMap(DX, DY, monsters);
+				
+				
+			}
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+				PlayerControl.move(0, 2, player, map);
+			}
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+				PlayerControl.move(-2, 0, player, map);
+			}
+			if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+				PlayerControl.move(0, -2, player, map);
+			}
+			if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+				PlayerControl.move(2, 0, player, map);
+			}
+
+			if (Mouse.isButtonDown(0) && first == true) {
+				first = false;
+			} else if (!Mouse.isButtonDown(0)) {
+				first = true;
+			}
+			MonsterControl.AI(monsters, player, map);
+			//render everything
+			MapControl.render(map);
+			player.render();
+			Render.monsters(monsters);
+			Render.Tile(saveTile);
+			Render.Tile(quitTile);
+
+			Display.update();
+			Display.sync(60);
+			
+		}
+	} else {
+		
+		while (!Display.isCloseRequested()) {
 			DX = Mouse.getDX();
 			DY = Mouse.getDY();
 			X = Mouse.getX();
@@ -143,7 +215,7 @@ public class MainGame {
 			} else if (!Mouse.isButtonDown(0)) {
 				first = true;
 			}
-			MonsterControl.AI(monsters, player, map);
+			
 			//render everything
 			MapControl.render(map);
 			player.render();
@@ -155,9 +227,10 @@ public class MainGame {
 			Display.sync(60);
 			
 		}
+	}
 
+		
 		Display.destroy();
 		System.exit(0);
-
 	}
 }

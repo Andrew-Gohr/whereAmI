@@ -28,7 +28,7 @@ public class LaunchPadForm extends JFrame {
 	private static final long serialVersionUID = 867101575549217027L;
 	static JButton runGame, exitButton;
 	static JComboBox<Object> resSelect, loadSelect;
-	static JRadioButton fullScreen, loadGame, newGame;
+	static JRadioButton fullScreen, loadGame, newGame, playGame, makeGame;
 	static JTextField newSave;
 	static JLabel statusField;
 	static DisplayMode[] modes;
@@ -62,11 +62,13 @@ public class LaunchPadForm extends JFrame {
 
 		ButtonGroup loadType = new ButtonGroup();
 
-		jp.setLayout(new GridLayout(5, 2));
+		jp.setLayout(new GridLayout(5, 1));
 		jp.add(resSelect = new JComboBox<Object>(displays));
 		jp.add(fullScreen = new JRadioButton("FullScreen"));
 		jp.add(newGame = new JRadioButton("New Game"));
 		jp.add(loadGame = new JRadioButton("Load Game"));
+		jp.add(playGame = new JRadioButton("Play"));
+		jp.add(makeGame = new JRadioButton("make"));
 		loadType.add(newGame);
 		loadType.add(loadGame);
 		jp.add(newSave = new JTextField("new_game"));
@@ -93,6 +95,9 @@ public class LaunchPadForm extends JFrame {
 
 		return fullScreen.isSelected();
 
+	}
+	public static boolean gelPlay() {
+		return playGame.isSelected();
 	}
 
 	public static Save getSave() {

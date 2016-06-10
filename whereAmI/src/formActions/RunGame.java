@@ -17,7 +17,7 @@ public class RunGame implements ActionListener {
 
 			Render.init(LaunchPadForm.getSelectedDisplay(), LaunchPadForm.isFullScreen());
 
-			MainGame.startGame(LaunchPadForm.getSave());
+			MainGame.startGame(LaunchPadForm.getSave(), LaunchPadForm.gelPlay());
 		} else {
 			LaunchPadForm.setStatus("Select a Load Type.");
 		}
