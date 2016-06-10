@@ -75,10 +75,7 @@ public class MainGame {
 			if (Mouse.isButtonDown(2)) {
 				MapControl.move(DX, DY, map);
 				PlayerControl.move(DX, DY, player, map);
-				
 				MonsterControl.moveMap(DX, DY, monsters);
-				
-				
 			}
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
