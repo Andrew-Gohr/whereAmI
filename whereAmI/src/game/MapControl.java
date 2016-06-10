@@ -37,6 +37,9 @@ public class MapControl {
 				Render.Tile(map.getCoord(i, j));
 			}
 		}
+		Render.Tile(map.getEntryPoint());
+		Render.Tile(map.getExitPoint());
 	}
+	
 
 }

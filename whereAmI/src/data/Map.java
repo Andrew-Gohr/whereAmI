@@ -13,11 +13,15 @@ public class Map implements Serializable {
 	private int tileSize;
 	private int width;
 	private int height;
+	private Tile entryPoint;
+	private Tile exitPoint;
 
 	public Map(int width, int height, int tileSize) {
 		this.width = width;
 		this.height = height;
 		this.setTileSize(tileSize);
+		entryPoint = new Tile(0, 0, tileSize, TextureID.ENTRY.getValue());
+		exitPoint = new Tile(0, 0, tileSize, TextureID.EXIT.getValue());
 		grid = new Tile[width][height];
 		int x = 0;
 		int y = 0;
@@ -58,6 +62,26 @@ public class Map implements Serializable {
 
 	public void setTileSize(int tileSize) {
 		this.tileSize = tileSize;
+	}
+	
+	
+
+	public Tile getEntryPoint() {
+		return entryPoint;
+	}
+
+	public void setEntryPoint(int x, int y) {
+		this.entryPoint.setX(x);
+		this.entryPoint.setY(y);
+	}
+
+	public Tile getExitPoint() {
+		return exitPoint;
+	}
+
+	public void setExitPoint(int x, int y) {
+		this.exitPoint.setX(x);
+		this.exitPoint.setY(y);
 	}
 
 	/*
