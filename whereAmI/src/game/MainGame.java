@@ -42,7 +42,7 @@ public class MainGame {
 		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, TextureID.QUITTILE.getValue());
 		
 		//Main Loop
-		while (!Display.isCloseRequested()) {
+		while (!Display.isCloseRequested() && !Collisions.playerMonsters(DX, DY, player, monsters)) {
 			DX = Mouse.getDX();
 			DY = Mouse.getDY();
 			X = Mouse.getX();
@@ -52,7 +52,7 @@ public class MainGame {
 			
 			//left click
 			if (Mouse.isButtonDown(0)) {
-				if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
+				if (!Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_E) && !Keyboard.isKeyDown(Keyboard.KEY_X)) {
 					if (saveTile.isInBounds(X, Y) && first == true) {
 
 						Save toSave = new Save(map, player, monsters);
@@ -75,11 +75,15 @@ public class MainGame {
 					}
 					
 					//add a monster if first click
-				} else if (first == true){
+				} 
+				if (first == true && Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_E) && !Keyboard.isKeyDown(Keyboard.KEY_X)){
 					monsters.addMonster(new Monster(X, Y, 15, 0));
 				}
-				if (!Keyboard.isKeyDown(Keyboard.KEY_B)) {
-					
+				else if (Keyboard.isKeyDown(Keyboard.KEY_E) && !Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_X)) {
+					map.setEntryPoint(X, Y);
+				}
+				else if (Keyboard.isKeyDown(Keyboard.KEY_X)  && !Keyboard.isKeyDown(Keyboard.KEY_E) && !Keyboard.isKeyDown(Keyboard.KEY_M)){
+					map.setExitPoint(X, Y);
 				}
 			}
 			

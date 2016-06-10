@@ -58,12 +58,16 @@ public class Collisions {
 	
 	public static boolean monsterMonsters(int Dx, int Dy, Monster monster, Monsters monsters) {
 		boolean collided = false;
+		
+		int x1 = Dx + (monster.getX() + monster.getTileSize());
+		int x2 = Dx + (monster.getX() - monster.getTileSize());
+		int y1 = Dy + (monster.getY() + monster.getTileSize());
+		int y2 = Dy + (monster.getY() - monster.getTileSize());
+		
 			for (int i = 0; i < monsters.size(); i++) {
+				
+				
 				if(!monster.equals(monsters.getMonster(i))){
-					int x1 = Dx + (monster.getX() + monster.getTileSize());
-					int x2 = Dx + (monster.getX() - monster.getTileSize());
-					int y1 = Dy + (monster.getY() + monster.getTileSize());
-					int y2 = Dy + (monster.getY() - monster.getTileSize());
 					
 					int X1 = (monsters.getMonster(i).getX() + monsters.getMonster(i).getTileSize());
 					int X2 = (monsters.getMonster(i).getX() - monsters.getMonster(i).getTileSize());
@@ -75,6 +79,26 @@ public class Collisions {
 						}
 			}		
 		}
+			return collided;
+	}
+	
+	public static boolean playerMonsters(int Dx, int Dy, Player player, Monsters monsters) {
+		boolean collided = false;
+		int x1 = Dx + (player.getX() + player.getTileSize());
+		int x2 = Dx + (player.getX() - player.getTileSize());
+		int y1 = Dy + (player.getY() + player.getTileSize());
+		int y2 = Dy + (player.getY() - player.getTileSize());
+			for (int i = 0; i < monsters.size(); i++) {
+				
+					int X1 = (monsters.getMonster(i).getX() + monsters.getMonster(i).getTileSize());
+					int X2 = (monsters.getMonster(i).getX() - monsters.getMonster(i).getTileSize());
+					int Y1 = (monsters.getMonster(i).getY() + monsters.getMonster(i).getTileSize());
+					int Y2 = (monsters.getMonster(i).getY() - monsters.getMonster(i).getTileSize());
+				
+						if (x1 > X2 && x2 < X1 && y1 > Y2 && y2 < Y1){
+							collided = true;
+						}
+			}		
 			return collided;
 	}
 }
