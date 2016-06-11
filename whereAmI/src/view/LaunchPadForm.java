@@ -61,16 +61,21 @@ public class LaunchPadForm extends JFrame {
 		JPanel jp = new JPanel();
 
 		ButtonGroup loadType = new ButtonGroup();
+		ButtonGroup playType = new ButtonGroup();
 
-		jp.setLayout(new GridLayout(5, 1));
+		jp.setLayout(new GridLayout(6, 1));
 		jp.add(resSelect = new JComboBox<Object>(displays));
 		jp.add(fullScreen = new JRadioButton("FullScreen"));
 		jp.add(newGame = new JRadioButton("New Game"));
 		jp.add(loadGame = new JRadioButton("Load Game"));
-		jp.add(playGame = new JRadioButton("Play"));
-		jp.add(makeGame = new JRadioButton("make"));
 		loadType.add(newGame);
 		loadType.add(loadGame);
+		jp.add(playGame = new JRadioButton("Play"));
+		jp.add(makeGame = new JRadioButton("make"));
+		playType.add(playGame);
+		playType.add(makeGame);
+		
+		
 		jp.add(newSave = new JTextField("new_game"));
 
 		jp.add(loadSelect = new JComboBox<Object>(FileManagment.getSaves()));
@@ -96,6 +101,7 @@ public class LaunchPadForm extends JFrame {
 		return fullScreen.isSelected();
 
 	}
+
 	public static boolean gelPlay() {
 		return playGame.isSelected();
 	}

@@ -20,7 +20,7 @@ public class TextureControl {
 			return texture.getTextureID();
 		} catch (IOException ioe) {
 			System.out.println(ioe);
-			
+
 		}
 		return TextureID.ERR.getValue();
 	}
@@ -42,7 +42,7 @@ public class TextureControl {
 		TextureID.UPRIGHTDOWN.setValue(loadTexture("tiles/upRightDown.png", "PNG"));
 		TextureID.UPDOWN.setValue(loadTexture("tiles/upDown.png", "PNG"));
 		TextureID.LEFTRIGHT.setValue(loadTexture("tiles/leftRight.png", "PNG"));
-		TextureID.FLOOR.setValue(loadTexture("tiles/dungeonFloor.png", "PNG")); 
+		TextureID.FLOOR.setValue(loadTexture("tiles/dungeonFloor.png", "PNG"));
 	}
 
 	public static int findWallTexture(boolean right, boolean left, boolean up, boolean down) {

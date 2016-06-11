@@ -36,7 +36,7 @@ public class Monster implements Serializable {
 	public void render() {
 		Render.monster(this);
 	}
-	
+
 	public boolean isInBounds(int mouseX, int mouseY) {
 
 		return mouseX > a[0] && mouseX < b[0] + tileSize && mouseY > a[1] && mouseY < b[1];
@@ -103,7 +103,7 @@ public class Monster implements Serializable {
 	public void setTexture(int texture) {
 		this.texture = texture;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

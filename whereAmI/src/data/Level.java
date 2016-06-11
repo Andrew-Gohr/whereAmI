@@ -3,24 +3,27 @@ package data;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class Level implements Serializable{
+public class Level implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5224323053724908036L;
 	private Map map[];
-	Level(int maps){
-		
+
+	Level(int maps) {
+
 		map = new Map[maps];
-		
+
 	}
+
 	public Map getMap(int i) {
 		return map[i];
 	}
+
 	public void setMap(Map map, int i) {
 		this.map[i] = map;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -28,6 +31,7 @@ public class Level implements Serializable{
 		result = prime * result + Arrays.hashCode(map);
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -41,8 +45,5 @@ public class Level implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

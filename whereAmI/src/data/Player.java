@@ -27,7 +27,6 @@ public class Player implements Serializable {
 	public void render() {
 		Render.Player(this);
 	}
-	
 
 	public int[] getA() {
 		return a;

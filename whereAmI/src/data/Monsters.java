@@ -30,7 +30,7 @@ public class Monsters implements Serializable {
 
 	public void removeMonster(int monster) {
 		list.remove(monster);
-		
+
 	}
 
 }

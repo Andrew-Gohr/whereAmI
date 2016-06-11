@@ -63,8 +63,6 @@ public class Map implements Serializable {
 	public void setTileSize(int tileSize) {
 		this.tileSize = tileSize;
 	}
-	
-	
 
 	public Tile getEntryPoint() {
 		return entryPoint;

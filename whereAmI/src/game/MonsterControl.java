@@ -6,22 +6,20 @@ import data.Monsters;
 import data.Player;
 
 public class MonsterControl {
-	
+
 	public static void AI(Monsters monsters, Player player, Map map) {
-		for (int i = 0; i < monsters.size(); i++){
+		for (int i = 0; i < monsters.size(); i++) {
 			if (player.getX() > monsters.getMonster(i).getX()) {
 				move(1, 0, monsters.getMonster(i), map, monsters);
-			}
-			else if (player.getX() < monsters.getMonster(i).getX()){
+			} else if (player.getX() < monsters.getMonster(i).getX()) {
 				move(-1, 0, monsters.getMonster(i), map, monsters);
 			}
-			
+
 			if (player.getY() > monsters.getMonster(i).getY()) {
 				move(0, 1, monsters.getMonster(i), map, monsters);
-			}
-			else if (player.getY() < monsters.getMonster(i).getY()){
+			} else if (player.getY() < monsters.getMonster(i).getY()) {
 				move(0, -1, monsters.getMonster(i), map, monsters);
-			}			
+			}
 		}
 	}
 
@@ -29,11 +27,11 @@ public class MonsterControl {
 		int tileSize = monster.getTileSize();
 		int x = monster.getX();
 		int y = monster.getY();
-		if (!Collisions.monsterMap(Dx, Dy, monster, map) && !Collisions.monsterMonsters(Dx, Dy, monster, monsters)){
-		int[] a = new int[2];
-		int[] b = new int[2];
-		int[] c = new int[2];
-		
+		if (!Collisions.monsterMap(Dx, Dy, monster, map) && !Collisions.monsterMonsters(Dx, Dy, monster, monsters)) {
+			int[] a = new int[2];
+			int[] b = new int[2];
+			int[] c = new int[2];
+
 			monster.setX(x += Dx);
 			a[0] = (x - (tileSize));
 			b[0] = (x);
@@ -42,23 +40,23 @@ public class MonsterControl {
 			a[1] = (y - (tileSize));
 			b[1] = (y + (tileSize));
 			c[1] = (y - (tileSize));
-			
-		
-		monster.setA(a);
-		monster.setB(b);
-		monster.setC(c);
+
+			monster.setA(a);
+			monster.setB(b);
+			monster.setC(c);
 		}
 	}
+
 	public static void moveMap(int Dx, int Dy, Monsters monsters) {
-		for (int i = 0; i < monsters.size(); i++){
-		int tileSize = monsters.getMonster(i).getTileSize();
-		int x = monsters.getMonster(i).getX();
-		int y = monsters.getMonster(i).getY();
-		
-		int[] a = new int[2];
-		int[] b = new int[2];
-		int[] c = new int[2];
-		
+		for (int i = 0; i < monsters.size(); i++) {
+			int tileSize = monsters.getMonster(i).getTileSize();
+			int x = monsters.getMonster(i).getX();
+			int y = monsters.getMonster(i).getY();
+
+			int[] a = new int[2];
+			int[] b = new int[2];
+			int[] c = new int[2];
+
 			monsters.getMonster(i).setX(x += Dx);
 			a[0] = (x - (tileSize));
 			b[0] = (x);
@@ -67,16 +65,12 @@ public class MonsterControl {
 			a[1] = (y - (tileSize));
 			b[1] = (y + (tileSize));
 			c[1] = (y - (tileSize));
-			
-		
-		monsters.getMonster(i).setA(a);
-		monsters.getMonster(i).setB(b);
-		monsters.getMonster(i).setC(c);
-		}
-		
-	}
 
-	
-	
+			monsters.getMonster(i).setA(a);
+			monsters.getMonster(i).setB(b);
+			monsters.getMonster(i).setC(c);
+		}
+
+	}
 
 }

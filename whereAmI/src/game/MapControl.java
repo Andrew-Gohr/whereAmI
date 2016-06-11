@@ -40,6 +40,5 @@ public class MapControl {
 		Render.Tile(map.getEntryPoint());
 		Render.Tile(map.getExitPoint());
 	}
-	
 
 }
