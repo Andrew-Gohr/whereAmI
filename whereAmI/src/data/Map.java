@@ -20,8 +20,8 @@ public class Map implements Serializable {
 		this.width = width;
 		this.height = height;
 		this.setTileSize(tileSize);
-		entryPoint = new Tile(0, 0, tileSize, TextureID.ENTRY.getValue());
-		exitPoint = new Tile(0, 0, tileSize, TextureID.EXIT.getValue());
+		entryPoint = new Tile(200, 30, tileSize, TextureID.ENTRY.getValue());
+		exitPoint = new Tile(600, 30, tileSize, TextureID.EXIT.getValue());
 		grid = new Tile[width][height];
 		int x = 0;
 		int y = 0;

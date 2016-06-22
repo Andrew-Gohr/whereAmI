@@ -4,6 +4,7 @@ import data.Map;
 import data.Monster;
 import data.Monsters;
 import data.Player;
+import data.Tile;
 
 public class Collisions {
 	public static boolean playerMap(int Dx, int Dy, Player player, Map map) {
@@ -99,5 +100,25 @@ public class Collisions {
 			}
 		}
 		return collided;
+	}
+	public static boolean playerTile(int Dx, int Dy, Player player, Tile tile) {
+
+		
+				if (tile.isWall()) {
+					int x1 = Dx + (player.getX() - player.getTileSize());
+					int x2 = Dx + (player.getX() + player.getTileSize());
+					int y1 = Dy + (player.getY() - player.getTileSize());
+					int y2 = Dy + (player.getY() + player.getTileSize());
+					int X1 = tile.getA()[0];
+					int Y1 = tile.getA()[1];
+					int X2 = tile.getC()[0];
+					int Y2 = tile.getC()[1];
+
+					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
+
+						return true;
+					}
+				}
+		return false;
 	}
 }

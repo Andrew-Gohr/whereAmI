@@ -12,10 +12,7 @@ import javax.swing.JTextField;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import data.Map;
-import data.Monsters;
-import data.Player;
-import data.Save;
+import data.Level;
 import formActions.ExitGame;
 import formActions.RunGame;
 import game.FileManagment;
@@ -106,15 +103,12 @@ public class LaunchPadForm extends JFrame {
 		return playGame.isSelected();
 	}
 
-	public static Save getSave() {
+	public static Level getSave() {
 		if (loadGame.isSelected()) {
 			return FileManagment.load((String) loadSelect.getSelectedItem());
 		} else if (newGame.isSelected()) {
-			Map map = new Map(50, 50, 30);
-			Player player = new Player(40, 40, 10);
-			Monsters Monsters = new Monsters();
 
-			return new Save(map, player, Monsters);
+			return new Level(3, 50, 50, 40, 0);
 		}
 		return null;
 	}

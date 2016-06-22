@@ -4,11 +4,12 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+
+import data.Level;
 import data.Map;
 import data.Monster;
 import data.Monsters;
 import data.Player;
-import data.Save;
 import data.TextureID;
 import data.Tile;
 import view.LaunchPadForm;
@@ -23,23 +24,22 @@ public class MainGame {
 	static int X2 = 0;
 	static int Y2 = 0;
 	static boolean first = true;
+	static boolean spaceFirst = false;
 
 	// data variables
 	static Map map;
 	static Player player;
 	static Monsters monsters;
 
-	public static void startGame(Save save, boolean play) {
+	public static void startGame(Level level, boolean play) {
 
-		map = save.getMap();
-		player = save.getPlayer();
-		monsters = save.getMonsters();
-		int mapWidth = map.getWidth();
-		int mapHeight = map.getHeight();
-
+		map = level.getMap(level.getlIndex());
+		player = level.getPlayer(level.getlIndex());
+		monsters = level.getMonsters(level.getlIndex());
+		
 		Tile saveTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 50, 50, TextureID.SAVETILE.getValue());
 		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, TextureID.QUITTILE.getValue());
-
+		
 		// Main Loop
 		if (play) {
 			while (!Display.isCloseRequested() && !Collisions.playerMonsters(DX, DY, player, monsters)) {
@@ -49,16 +49,28 @@ public class MainGame {
 				Y = Mouse.getY();
 
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
+				
+				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					if(level.getlIndex() > 0){
+					changeMap(-1, level);
+					spaceFirst = false;
+					}
+					}
+				if(Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					if(level.getlIndex() < level.getlength() - 1){
+					changeMap(1, level);
+					spaceFirst = false;
+					}
+				}
+				
 				// left click
 				if (Mouse.isButtonDown(0)) {
 
-					if (saveTile.isInBounds(X, Y) && first == true) {
-
-						Save toSave = new Save(map, player, monsters);
-						FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
+					if (saveTile.isInBounds(X, Y) && first) {
+						
+						FileManagment.saveTo(level, LaunchPadForm.getSaveString());
 					}
-					if (quitTile.isInBounds(X, Y) && first == true) {
+					if (quitTile.isInBounds(X, Y) && first) {
 						break;
 					}
 				}
@@ -90,11 +102,18 @@ public class MainGame {
 					PlayerControl.move(2, 0, player, map);
 				}
 
-				if (Mouse.isButtonDown(0) && first == true) {
+				if (Mouse.isButtonDown(0) && first) {
 					first = false;
 				} else if (!Mouse.isButtonDown(0)) {
 					first = true;
 				}
+				
+				if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && spaceFirst) {
+					spaceFirst = false;
+				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					spaceFirst = true;
+				}
+				
 				MonsterControl.AI(monsters, player, map);
 				// render everything
 				MapControl.render(map);
@@ -116,23 +135,35 @@ public class MainGame {
 				Y = Mouse.getY();
 
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
+				
+				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					if(level.getlIndex() > 0){
+					changeMap(-1, level);
+					spaceFirst = false;
+					}
+				}
+				if(Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					if(level.getlIndex() < level.getlength() - 1){
+					changeMap(1, level);
+					spaceFirst = false;
+					}
+				}
+				
 				// left click
 				if (Mouse.isButtonDown(0)) {
 					if (!Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_E)
 							&& !Keyboard.isKeyDown(Keyboard.KEY_X)) {
 						if (saveTile.isInBounds(X, Y) && first == true) {
 
-							Save toSave = new Save(map, player, monsters);
-							FileManagment.saveTo(toSave, LaunchPadForm.getSaveString());
+							FileManagment.saveTo(level, LaunchPadForm.getSaveString());
 						}
 						if (quitTile.isInBounds(X, Y) && first == true) {
 							break;
 						}
 
 						// check each tile for a collision with mouse
-						for (int i = 0; i < mapWidth; i++) {
-							for (int j = 0; j < mapHeight; j++) {
+						for (int i = 0; i < map.getWidth(); i++) {
+							for (int j = 0; j < map.getHeight(); j++) {
 								// update adjacent tiles and set as a wall
 								if (map.getCoord(i, j).isInBounds(X, Y)) {
 									map.getCoord(i, j).setWall(true);
@@ -162,8 +193,8 @@ public class MainGame {
 					if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
 
 						// check each tile for collisions with the mouse
-						for (int i = 0; i < mapWidth; i++) {
-							for (int j = 0; j < mapHeight; j++) {
+						for (int i = 0; i < map.getWidth(); i++) {
+							for (int j = 0; j < map.getHeight(); j++) {
 								// set tile as a floor and update adjacent
 								if (map.getCoord(i, j).isInBounds(X, Y)) {
 									map.getCoord(i, j).setWall(false);
@@ -206,10 +237,16 @@ public class MainGame {
 					PlayerControl.move(2, 0, player, map);
 				}
 
-				if (Mouse.isButtonDown(0) && first == true) {
+				if (Mouse.isButtonDown(0) && first) {
 					first = false;
 				} else if (!Mouse.isButtonDown(0)) {
 					first = true;
+				}
+				
+				if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && spaceFirst) {
+					spaceFirst = false;
+				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					spaceFirst = true;
 				}
 
 				// render everything
@@ -228,4 +265,11 @@ public class MainGame {
 		Display.destroy();
 		System.exit(0);
 	}
+
+	private static void changeMap(int num, Level level) {
+		level.setlIndex(level.getlIndex() + num);
+		map = level.getMap(level.getlIndex());
+		player = level.getPlayer(level.getlIndex());
+		monsters = level.getMonsters(level.getlIndex());
+		}
 }

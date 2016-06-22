@@ -7,12 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import data.Save;
-
+import data.Level;
 public class FileManagment {
 	// static Save save;
-	public static void saveTo(Save save, String file) {
+	public static void saveTo(Level level, String file) {
 
 		File theFile = new File("saves/" + file);
 
@@ -24,29 +22,29 @@ public class FileManagment {
 
 			try (FileOutputStream fops = new FileOutputStream(theFile)) {
 				ObjectOutputStream output = new ObjectOutputStream(fops);
-				output.writeObject((Object) save);
+				output.writeObject((Object) level);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static Save load(String file) {
+	public static Level load(String file) {
 
 		File theFile = new File(file);
 
-		Save save = null;
+		Level level = null;
 
 		try (FileInputStream fips = new FileInputStream(theFile)) {
 			ObjectInputStream output = new ObjectInputStream(fips);
-			save = (Save) output.readObject();
-			return save;
+			level = (Level) output.readObject();
+			return level;
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return save;
+		return level;
 
 	}
 
