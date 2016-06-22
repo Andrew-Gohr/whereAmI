@@ -71,8 +71,7 @@ public class LaunchPadForm extends JFrame {
 		jp.add(makeGame = new JRadioButton("make"));
 		playType.add(playGame);
 		playType.add(makeGame);
-		
-		
+
 		jp.add(newSave = new JTextField("new_game"));
 
 		jp.add(loadSelect = new JComboBox<Object>(FileManagment.getSaves()));

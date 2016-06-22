@@ -9,16 +9,19 @@ public class MonsterControl {
 
 	public static void AI(Monsters monsters, Player player, Map map) {
 		for (int i = 0; i < monsters.size(); i++) {
-			if (player.getX() > monsters.getMonster(i).getX()) {
-				move(1, 0, monsters.getMonster(i), map, monsters);
-			} else if (player.getX() < monsters.getMonster(i).getX()) {
-				move(-1, 0, monsters.getMonster(i), map, monsters);
-			}
+			if (210 > Math.sqrt(Math.pow(monsters.getMonster(i).getX() - player.getX(), 2)
+					+ Math.pow(monsters.getMonster(i).getY() - player.getY(), 2))) {
+				if (player.getX() > monsters.getMonster(i).getX()) {
+					move(1, 0, monsters.getMonster(i), map, monsters);
+				} else if (player.getX() < monsters.getMonster(i).getX()) {
+					move(-1, 0, monsters.getMonster(i), map, monsters);
+				}
 
-			if (player.getY() > monsters.getMonster(i).getY()) {
-				move(0, 1, monsters.getMonster(i), map, monsters);
-			} else if (player.getY() < monsters.getMonster(i).getY()) {
-				move(0, -1, monsters.getMonster(i), map, monsters);
+				if (player.getY() > monsters.getMonster(i).getY()) {
+					move(0, 1, monsters.getMonster(i), map, monsters);
+				} else if (player.getY() < monsters.getMonster(i).getY()) {
+					move(0, -1, monsters.getMonster(i), map, monsters);
+				}
 			}
 		}
 	}

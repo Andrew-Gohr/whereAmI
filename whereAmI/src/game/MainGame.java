@@ -36,38 +36,40 @@ public class MainGame {
 		map = level.getMap(level.getlIndex());
 		player = level.getPlayer(level.getlIndex());
 		monsters = level.getMonsters(level.getlIndex());
-		
+
 		Tile saveTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 50, 50, TextureID.SAVETILE.getValue());
 		Tile quitTile = new Tile(Display.getWidth() - 50, Display.getHeight() - 150, 50, TextureID.QUITTILE.getValue());
-		
+
 		// Main Loop
 		if (play) {
-			while (!Display.isCloseRequested() && !Collisions.playerMonsters(DX, DY, player, monsters)) {
+			while (!Display.isCloseRequested()) {
 				DX = Mouse.getDX();
 				DY = Mouse.getDY();
 				X = Mouse.getX();
 				Y = Mouse.getY();
 
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-				
-				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-					if(level.getlIndex() > 0){
-					changeMap(-1, level);
-					spaceFirst = false;
-					}
-					}
-				if(Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-					if(level.getlIndex() < level.getlength() - 1){
-					changeMap(1, level);
-					spaceFirst = false;
+
+				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst
+						&& Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+					if (level.getlIndex() > 0) {
+						changeMap(-1, level);
+						spaceFirst = false;
 					}
 				}
-				
+				if (Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst
+						&& Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+					if (level.getlIndex() < level.getlength() - 1) {
+						changeMap(1, level);
+						spaceFirst = false;
+					}
+				}
+
 				// left click
 				if (Mouse.isButtonDown(0)) {
 
 					if (saveTile.isInBounds(X, Y) && first) {
-						
+
 						FileManagment.saveTo(level, LaunchPadForm.getSaveString());
 					}
 					if (quitTile.isInBounds(X, Y) && first) {
@@ -107,13 +109,13 @@ public class MainGame {
 				} else if (!Mouse.isButtonDown(0)) {
 					first = true;
 				}
-				
+
 				if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && spaceFirst) {
 					spaceFirst = false;
-				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 					spaceFirst = true;
 				}
-				
+
 				MonsterControl.AI(monsters, player, map);
 				// render everything
 				MapControl.render(map);
@@ -135,20 +137,22 @@ public class MainGame {
 				Y = Mouse.getY();
 
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-				
-				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-					if(level.getlIndex() > 0){
-					changeMap(-1, level);
-					spaceFirst = false;
+
+				if (Collisions.playerTile(DX, DY, player, map.getEntryPoint()) && spaceFirst
+						&& Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+					if (level.getlIndex() > 0) {
+						changeMap(-1, level);
+						spaceFirst = false;
 					}
 				}
-				if(Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst && Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-					if(level.getlIndex() < level.getlength() - 1){
-					changeMap(1, level);
-					spaceFirst = false;
+				if (Collisions.playerTile(DX, DY, player, map.getExitPoint()) && spaceFirst
+						&& Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+					if (level.getlIndex() < level.getlength() - 1) {
+						changeMap(1, level);
+						spaceFirst = false;
 					}
 				}
-				
+
 				// left click
 				if (Mouse.isButtonDown(0)) {
 					if (!Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_E)
@@ -242,10 +246,10 @@ public class MainGame {
 				} else if (!Mouse.isButtonDown(0)) {
 					first = true;
 				}
-				
+
 				if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && spaceFirst) {
 					spaceFirst = false;
-				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+				} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 					spaceFirst = true;
 				}
 
@@ -271,5 +275,5 @@ public class MainGame {
 		map = level.getMap(level.getlIndex());
 		player = level.getPlayer(level.getlIndex());
 		monsters = level.getMonsters(level.getlIndex());
-		}
+	}
 }
