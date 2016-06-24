@@ -44,8 +44,9 @@ public class Render {
 		TextureID.QUITTILE.setValue(TextureControl.loadTexture("quit.png", "PNG"));
 		TextureID.SAVETILE.setValue(TextureControl.loadTexture("save.png", "PNG"));
 		TextureID.ERR.setValue(TextureControl.loadTexture("ERROR.png", "PNG"));
-		TextureID.ENTRY.setValue(TextureControl.loadTexture("ladder.png", "png"));
+		TextureID.ENTRY.setValue(TextureControl.loadTexture("ladder.png", "PNG"));
 		TextureID.EXIT.setValue(TextureID.ENTRY.getValue());
+		TextureID.MONSTER.setValue(TextureControl.loadTexture("monster.png", "PNG"));
 		TextureControl.loadWalls();
 	}
 
@@ -79,8 +80,11 @@ public class Render {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, monster.getTexture());
 		GL11.glColor3d(1, 1, 1);
 		GL11.glBegin(GL11.GL_TRIANGLES);
+		GL11.glTexCoord2f(0, 0); // top left
 		GL11.glVertex2f(monster.getA()[0], monster.getA()[1]);
+		GL11.glTexCoord2f(1, 0); // bottom left
 		GL11.glVertex2f(monster.getB()[0], monster.getB()[1]);
+		GL11.glTexCoord2f(0, 1); // bottom right
 		GL11.glVertex2f(monster.getC()[0], monster.getC()[1]);
 		GL11.glEnd();
 

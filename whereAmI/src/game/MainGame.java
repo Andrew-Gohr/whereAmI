@@ -181,7 +181,7 @@ public class MainGame {
 					}
 					if (first == true && Keyboard.isKeyDown(Keyboard.KEY_M) && !Keyboard.isKeyDown(Keyboard.KEY_E)
 							&& !Keyboard.isKeyDown(Keyboard.KEY_X)) {
-						monsters.addMonster(new Monster(X, Y, 15, 0));
+						monsters.addMonster(new Monster(X, Y, 25, TextureID.MONSTER.getValue()));
 					} else if (Keyboard.isKeyDown(Keyboard.KEY_E) && !Keyboard.isKeyDown(Keyboard.KEY_M)
 							&& !Keyboard.isKeyDown(Keyboard.KEY_X)) {
 						map.setEntryPoint(X, Y);
