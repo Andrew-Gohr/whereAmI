@@ -31,7 +31,7 @@ public class Render {
 			Display.create();
 
 		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -70,9 +70,9 @@ public class Render {
 	public static void Player(Player player) {
 		GL11.glBegin(GL11.GL_TRIANGLES);
 		GL11.glColor3d(1, 1, 1);
-		GL11.glVertex2f(player.getA()[0], player.getA()[1]);
-		GL11.glVertex2f(player.getB()[0], player.getB()[1]);
-		GL11.glVertex2f(player.getC()[0], player.getC()[1]);
+		GL11.glVertex2f(player.getX() - player.getTileSize(), player.getY() - player.getTileSize());
+		GL11.glVertex2f(player.getX(), player.getY() + player.getTileSize());
+		GL11.glVertex2f(player.getX() + player.getTileSize(), player.getY() - (player.getTileSize()));
 		GL11.glEnd();
 	}
 
