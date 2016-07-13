@@ -57,13 +57,13 @@ public class Render {
 		GL11.glColor3d(1, 1, 1);
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 1); // top left
-		GL11.glVertex2f(tile.getA()[0], tile.getA()[1]);
+		GL11.glVertex2f(tile.getX() - tile.getTileSize(), tile.getY() - tile.getTileSize());
 		GL11.glTexCoord2f(0, 0); // bottom left
-		GL11.glVertex2f(tile.getB()[0], tile.getB()[1]);
+		GL11.glVertex2f(tile.getX() - tile.getTileSize(), tile.getY() + tile.getTileSize());
 		GL11.glTexCoord2f(1, 0); // bottom right
-		GL11.glVertex2f(tile.getC()[0], tile.getC()[1]);
+		GL11.glVertex2f(tile.getX() + tile.getTileSize(), tile.getY() + tile.getTileSize());
 		GL11.glTexCoord2f(1, 1); // top right
-		GL11.glVertex2f(tile.getD()[0], tile.getD()[1]);
+		GL11.glVertex2f(tile.getX() + tile.getTileSize(), tile.getY() - tile.getTileSize());
 		GL11.glEnd();
 	}
 
@@ -77,14 +77,14 @@ public class Render {
 	}
 
 	public static void monster(Monster monster) {
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, monster.getTexture());
+		//GL11.glBindTexture(GL11.GL_TEXTURE_2D, monster.getTexture());
 		GL11.glColor3d(1, 1, 1);
 		GL11.glBegin(GL11.GL_TRIANGLES);
-		GL11.glTexCoord2d(0, 0);
+		//GL11.glTexCoord2d(0, 0);
 		GL11.glVertex2f(monster.getA()[0], monster.getA()[1]);
-		GL11.glTexCoord2d(0.5, 1);
+		//GL11.glTexCoord2d(0.5, 1);
 		GL11.glVertex2f(monster.getB()[0], monster.getB()[1]);
-		GL11.glTexCoord2d(1, 0);
+		//GL11.glTexCoord2d(1, 0);
 		GL11.glVertex2f(monster.getC()[0], monster.getC()[1]);
 		GL11.glEnd();
 

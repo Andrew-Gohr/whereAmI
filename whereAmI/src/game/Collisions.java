@@ -8,18 +8,19 @@ import data.Tile;
 
 public class Collisions {
 	public static boolean playerMap(int Dx, int Dy, Player player, Map map) {
-
+		Tile tile;
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
+				tile = map.getCoord(i, j);
 				if (map.getCoord(i, j).isWall()) {
 					int x1 = Dx + (player.getX() - player.getTileSize());
 					int x2 = Dx + (player.getX() + player.getTileSize());
 					int y1 = Dy + (player.getY() - player.getTileSize());
 					int y2 = Dy + (player.getY() + player.getTileSize());
-					int X1 = map.getCoord(i, j).getA()[0];
-					int Y1 = map.getCoord(i, j).getA()[1];
-					int X2 = map.getCoord(i, j).getC()[0];
-					int Y2 = map.getCoord(i, j).getC()[1];
+					int X1 = tile.getX() - tile.getTileSize();
+					int Y1 = tile.getY() - tile.getTileSize();
+					int X2 = tile.getX() + tile.getTileSize();
+					int Y2 = tile.getY() + tile.getTileSize();
 
 					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
 
@@ -33,18 +34,19 @@ public class Collisions {
 	}
 
 	public static boolean monsterMap(int Dx, int Dy, Monster monster, Map map) {
-
+		Tile tile;
 		for (int i = 0; i < map.getWidth(); i++) {
 			for (int j = 0; j < map.getHeight(); j++) {
+				tile = map.getCoord(i, j);
 				if (map.getCoord(i, j).isWall()) {
 					int x1 = Dx + (monster.getX() - monster.getTileSize());
 					int x2 = Dx + (monster.getX() + monster.getTileSize());
 					int y1 = Dy + (monster.getY() - monster.getTileSize());
 					int y2 = Dy + (monster.getY() + monster.getTileSize());
-					int X1 = map.getCoord(i, j).getA()[0];
-					int Y1 = map.getCoord(i, j).getA()[1];
-					int X2 = map.getCoord(i, j).getC()[0];
-					int Y2 = map.getCoord(i, j).getC()[1];
+					int X1 = tile.getX() - tile.getTileSize();
+					int Y1 = tile.getY() - tile.getTileSize();
+					int X2 = tile.getX() + tile.getTileSize();
+					int Y2 = tile.getY() + tile.getTileSize();
 
 					if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
 
@@ -74,9 +76,9 @@ public class Collisions {
 				int Y1 = (monsters.getMonster(i).getY() + monsters.getMonster(i).getTileSize());
 				int Y2 = (monsters.getMonster(i).getY() - monsters.getMonster(i).getTileSize());
 
-				if (x1 > X2 && x2 < X1 && y1 > Y2 && y2 < Y1) {
+				if (x1 > X2 && x2 < X1 && y1 > Y2 && y2 < Y1) 
 					collided = true;
-				}
+				
 			}
 		}
 		return collided;
@@ -104,21 +106,28 @@ public class Collisions {
 
 	public static boolean playerTile(int Dx, int Dy, Player player, Tile tile) {
 
-		if (tile.isWall()) {
-			int x1 = Dx + (player.getX() - player.getTileSize());
-			int x2 = Dx + (player.getX() + player.getTileSize());
-			int y1 = Dy + (player.getY() - player.getTileSize());
-			int y2 = Dy + (player.getY() + player.getTileSize());
-			int X1 = tile.getA()[0];
-			int Y1 = tile.getA()[1];
-			int X2 = tile.getC()[0];
-			int Y2 = tile.getC()[1];
+		     int x1 = 0;
+		     int x2 = 0;
+		     int y1 = 0;
+		     int y2 = 0;
+		     int X1 = 0;
+		     int Y1 = 0;
+		     int X2 = 0;
+		     int Y2 = 0;
+		
+		     if (tile.isWall()) {
+			x1 = Dx + (player.getX() - player.getTileSize());
+			x2 = Dx + (player.getX() + player.getTileSize());
+			y1 = Dy + (player.getY() - player.getTileSize());
+			y2 = Dy + (player.getY() + player.getTileSize());
+			X1 = tile.getX() - tile.getTileSize();
+			Y1 = tile.getY() - tile.getTileSize();
+			X2 = tile.getX() + tile.getTileSize();
+			Y2 = tile.getY() + tile.getTileSize();
 
-			if (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1) {
-
-				return true;
-			}
-		}
-		return false;
+			
+	}
+		return (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1); 
 	}
 }
+
