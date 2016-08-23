@@ -15,11 +15,13 @@ public class FileManagment {
 
 		File theFile = new File("saves/" + file);
 
-		if (theFile.exists())
+		if (theFile.exists()) {
+			System.out.println("Removing old " + file);
 			theFile.delete();
+		}
 
 		if (!theFile.exists()) {
-			System.out.println("creating directory: " + file);
+			System.out.println("Creating " + file);
 
 			try (FileOutputStream fops = new FileOutputStream(theFile)) {
 				ObjectOutputStream output = new ObjectOutputStream(fops);
@@ -35,7 +37,7 @@ public class FileManagment {
 		File theFile = new File(file);
 
 		Level level = null;
-
+		System.out.println("Attempting Read " + file);
 		try (FileInputStream fips = new FileInputStream(theFile)) {
 			ObjectInputStream output = new ObjectInputStream(fips);
 			level = (Level) output.readObject();
@@ -60,7 +62,6 @@ public class FileManagment {
 			for (int i = 0; i < directoryListing.length; i++) {
 
 				saves[i] = directoryListing[i].getPath();
-				System.out.println(directoryListing[i].getPath());
 			}
 		}
 		return saves;

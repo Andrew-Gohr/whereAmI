@@ -1,6 +1,11 @@
 package view;
 
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +18,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import data.Level;
+import data.Settings;
 import formActions.ExitGame;
 import formActions.RunGame;
 import game.FileManagment;
@@ -34,7 +40,6 @@ public class LaunchPadForm extends JFrame {
 
 		String[] displays = null;
 		try {
-			System.out.println("Loading Resolutions...");
 			modes = Display.getAvailableDisplayModes();
 			displays = new String[modes.length];
 			int j = 0;
@@ -45,11 +50,9 @@ public class LaunchPadForm extends JFrame {
 					displays[j] = Integer.toString(modes[i].getWidth()) + " x "
 							+ Integer.toString(modes[i].getHeight());
 					j++;
-					System.out.println(i);
 				}
 
 			}
-			System.out.println("...Done");
 
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -77,8 +80,8 @@ public class LaunchPadForm extends JFrame {
 		jp.add(loadSelect = new JComboBox<Object>(FileManagment.getSaves()));
 		jp.add(exitButton = new JButton("Quit"));
 		jp.add(runGame = new JButton("Enter The Building"));
-
 		jp.add(statusField = new JLabel(""));
+		loadSettings();
 
 		runGame.addActionListener(new RunGame());
 		exitButton.addActionListener(new ExitGame());
@@ -92,24 +95,26 @@ public class LaunchPadForm extends JFrame {
 
 	}
 
+	public static int getResIndex() {
+		return resSelect.getSelectedIndex();
+	}
+
 	public static boolean isFullScreen() {
 
 		return fullScreen.isSelected();
 
 	}
 
-	public static boolean gelPlay() {
+	public static boolean getPlay() {
 		return playGame.isSelected();
 	}
 
 	public static Level getSave() {
 		if (loadGame.isSelected()) {
 			return FileManagment.load((String) loadSelect.getSelectedItem());
-		} else if (newGame.isSelected()) {
-
+		} else {
 			return new Level(3, 50, 50, 40, 0);
 		}
-		return null;
 	}
 
 	public static String getSaveString() {
@@ -117,12 +122,55 @@ public class LaunchPadForm extends JFrame {
 		return newSave.getText();
 	}
 
+	public static int getLoadIndex() {
+		return loadSelect.getSelectedIndex();
+	}
+
 	public static boolean isvalid() {
 		return loadGame.isSelected() || newGame.isSelected();
+	}
+
+	public static boolean isNew() {
+		return newGame.isSelected();
+
 	}
 
 	public static void setStatus(String status) {
 		statusField.setText(status);
 
 	}
+
+	private static void loadSettings() {
+		Settings settings;
+		String file = "config/launch";
+		File theFile = new File(file);
+
+		System.out.println("Attempting Read " + file);
+		try (FileInputStream fips = new FileInputStream(theFile)) {
+			ObjectInputStream output = new ObjectInputStream(fips);
+			settings = (Settings) output.readObject();
+			setFields(settings);
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void setFields(Settings settings) {
+		if (settings.isFullScreen()) {
+			fullScreen.setSelected(true);
+		} else {
+			fullScreen.setSelected(false);
+		}
+
+		loadSelect.setSelectedIndex(settings.getLoadIndex());
+		resSelect.setSelectedIndex(settings.getResIndex());
+		newGame.setSelected(settings.isNewGame());
+		loadGame.setSelected(!settings.isNewGame());
+		playGame.setSelected(settings.isPlay());
+		makeGame.setSelected(!settings.isPlay());
+
+	}
+
 }

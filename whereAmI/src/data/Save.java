@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+//      DEPRICATED
 public class Save implements Serializable {
 
 	/**

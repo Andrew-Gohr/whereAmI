@@ -11,6 +11,7 @@ public class Level implements Serializable {
 	private Map maps[];
 	private Player players[];
 	private Monsters monsters[];
+	// denotes the current level
 	private int lIndex;
 
 	public Level(int num, int width, int height, int tileSize, int lIndex) {
@@ -21,7 +22,8 @@ public class Level implements Serializable {
 
 		for (int i = 0; i < maps.length; i++) {
 			maps[i] = new Map(width, height, tileSize);
-			players[i] = new Player(40, 40, tileSize / 2);
+
+			players[i] = new Player(maps[i].getEntryPoint().getX(), maps[i].getEntryPoint().getY(), tileSize / 2);
 			monsters[i] = new Monsters();
 		}
 

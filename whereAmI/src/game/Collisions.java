@@ -76,9 +76,9 @@ public class Collisions {
 				int Y1 = (monsters.getMonster(i).getY() + monsters.getMonster(i).getTileSize());
 				int Y2 = (monsters.getMonster(i).getY() - monsters.getMonster(i).getTileSize());
 
-				if (x1 > X2 && x2 < X1 && y1 > Y2 && y2 < Y1) 
+				if (x1 > X2 && x2 < X1 && y1 > Y2 && y2 < Y1)
 					collided = true;
-				
+
 			}
 		}
 		return collided;
@@ -106,16 +106,16 @@ public class Collisions {
 
 	public static boolean playerTile(int Dx, int Dy, Player player, Tile tile) {
 
-		     int x1 = 0;
-		     int x2 = 0;
-		     int y1 = 0;
-		     int y2 = 0;
-		     int X1 = 0;
-		     int Y1 = 0;
-		     int X2 = 0;
-		     int Y2 = 0;
-		
-		     if (tile.isWall()) {
+		int x1 = 0;
+		int x2 = 0;
+		int y1 = 0;
+		int y2 = 0;
+		int X1 = 0;
+		int Y1 = 0;
+		int X2 = 0;
+		int Y2 = 0;
+
+		if (tile.isWall()) {
 			x1 = Dx + (player.getX() - player.getTileSize());
 			x2 = Dx + (player.getX() + player.getTileSize());
 			y1 = Dy + (player.getY() - player.getTileSize());
@@ -125,9 +125,7 @@ public class Collisions {
 			X2 = tile.getX() + tile.getTileSize();
 			Y2 = tile.getY() + tile.getTileSize();
 
-			
-	}
-		return (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1); 
+		}
+		return (x1 < X2 && x2 > X1 && y1 < Y2 && y2 > Y1);
 	}
 }
-

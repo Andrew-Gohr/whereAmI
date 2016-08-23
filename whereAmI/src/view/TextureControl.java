@@ -13,10 +13,7 @@ public class TextureControl {
 			Texture texture;
 			texture = TextureLoader.getTexture(type, ResourceLoader.getResourceAsStream("/res/" + texToLoad));
 
-			System.out.println("Texture loaded:    " + texToLoad);
-			System.out.println(">> Image width:    " + texture.getImageWidth());
-			System.out.println(">> Image height:   " + texture.getImageHeight());
-			System.out.println(">> Texture ID:     " + texture.getTextureID() + "\n");
+			System.out.println("Texture loaded:    " + texToLoad + "   ID: " + texture.getTextureID());
 			return texture.getTextureID();
 		} catch (IOException ioe) {
 			System.out.println(ioe);
@@ -52,7 +49,6 @@ public class TextureControl {
 			return TextureID.NONE.getValue();
 		} else if (!up && down && right && left) {
 			return TextureID.UP.getValue();
-
 		} else if (!up && !down && right && left) {
 			return TextureID.UPDOWN.getValue();
 		} else if (!up && !down && !right && left) {

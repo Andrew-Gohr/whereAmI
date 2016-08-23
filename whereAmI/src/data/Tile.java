@@ -19,7 +19,7 @@ public class Tile implements Serializable {
 		this.y = y;
 		this.tileSize = tileSize;
 		this.texture = texture;
-		
+
 	}
 
 	public Tile() {
@@ -51,7 +51,7 @@ public class Tile implements Serializable {
 
 	public void setY(int y) {
 		this.y = y;
-		
+
 	}
 
 	public boolean isWall() {

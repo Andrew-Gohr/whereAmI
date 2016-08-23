@@ -19,6 +19,7 @@ public class Render {
 		screenWidth = displayMode.getWidth();
 		screenHeight = displayMode.getHeight();
 
+		System.out.println("Setting up DisplayMode");
 		try {
 
 			if (!fullScreen) {
@@ -26,27 +27,29 @@ public class Render {
 			} else {
 				Display.setDisplayModeAndFullscreen(displayMode);
 				Display.setFullscreen(true);
+				System.out.println("Fullscreen True");
 			}
 
 			Display.create();
 
 		} catch (LWJGLException e) {
-			
+
 			e.printStackTrace();
 		}
-
+		System.out.printf("%d X %d \n", screenWidth, screenHeight);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, screenWidth, 0, screenHeight, 1, -1);
 		// GL11.glOrtho(100, 100, 100, 100, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		System.out.println("loading Textures");
 		TextureID.QUITTILE.setValue(TextureControl.loadTexture("quit.png", "PNG"));
 		TextureID.SAVETILE.setValue(TextureControl.loadTexture("save.png", "PNG"));
 		TextureID.ERR.setValue(TextureControl.loadTexture("ERROR.png", "PNG"));
-		TextureID.ENTRY.setValue(TextureControl.loadTexture("ladder.png", "PNG"));
-		TextureID.EXIT.setValue(TextureID.ENTRY.getValue());
-		TextureID.MONSTER.setValue(TextureControl.loadTexture("monster.png", "PNG"));
+		TextureID.ENTRY.setValue(TextureControl.loadTexture("ladderDN.png", "PNG"));
+		TextureID.EXIT.setValue(TextureControl.loadTexture("ladderUP.png", "PNG"));
+
 		TextureControl.loadWalls();
 	}
 
@@ -77,14 +80,14 @@ public class Render {
 	}
 
 	public static void monster(Monster monster) {
-		//GL11.glBindTexture(GL11.GL_TEXTURE_2D, monster.getTexture());
+		// GL11.glBindTexture(GL11.GL_TEXTURE_2D, monster.getTexture());
 		GL11.glColor3d(1, 1, 1);
 		GL11.glBegin(GL11.GL_TRIANGLES);
-		//GL11.glTexCoord2d(0, 0);
+		// GL11.glTexCoord2d(0, 0);
 		GL11.glVertex2f(monster.getA()[0], monster.getA()[1]);
-		//GL11.glTexCoord2d(0.5, 1);
+		// GL11.glTexCoord2d(0.5, 1);
 		GL11.glVertex2f(monster.getB()[0], monster.getB()[1]);
-		//GL11.glTexCoord2d(1, 0);
+		// GL11.glTexCoord2d(1, 0);
 		GL11.glVertex2f(monster.getC()[0], monster.getC()[1]);
 		GL11.glEnd();
 
