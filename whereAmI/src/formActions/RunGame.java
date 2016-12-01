@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import data.Settings;
 import game.LaunchPad;
 import game.MainGame;
+import game.MainMenu;
 import view.LaunchPadForm;
 import view.Render;
 
@@ -27,6 +28,7 @@ public class RunGame implements ActionListener {
 			getSettings();
 			saveSettings();
 			LaunchPad.exit();
+			MainMenu.start();
 			if (settings.isPlay()) {
 				System.out.println("Game started in Play mode");
 				MainGame.play(settings.getLevel());

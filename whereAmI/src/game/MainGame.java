@@ -33,6 +33,9 @@ public class MainGame {
 	static Monsters monsters;
 
 	public static void play(Level level) {
+
+		Render.gameInit();
+
 		map = level.getMap(level.getlIndex());
 		player = level.getPlayer(level.getlIndex());
 		monsters = level.getMonsters(level.getlIndex());
@@ -129,6 +132,8 @@ public class MainGame {
 	}
 
 	public static void make(Level level) {
+
+		Render.gameInit();
 
 		map = level.getMap(level.getlIndex());
 		player = level.getPlayer(level.getlIndex());
